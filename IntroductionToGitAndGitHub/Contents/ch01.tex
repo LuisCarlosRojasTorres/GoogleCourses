@@ -1,0 +1,397 @@
+%%%%%%%%%%%%%%%%%%%%% chapter.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% sample chapter
+%
+% Use this file as a template for your own input.
+%
+%%%%%%%%%%%%%%%%%%%%%%%% Springer-Verlag %%%%%%%%%%%%%%%%%%%%%%%%%%
+%\motto{Use the template \emph{chapter.tex} to style the various elements of your chapter content.}
+\chapter{Week 1}
+
+\section{Course Introduction}
+
+	\subsection{Course Introduction}
+
+Hi there, and welcome back. You've heard us talk a lot about programming and automation. This course focuses on a slightly different aspect. How to keep track of the different versions of your code and configuration files using version control systems or VCS. These are tools that everyone in IT can benefit from, even if it's not just for programming or automation itself. 
+It will allow us to easily roll back when mistakes happen and also help us collaborate with others. You might have already heard of version control systems in the context of managing configuration files or maintaining the source code of programs and scripts.
+
+In this course, we'll introduce you to a popular VCS called Git, and show you some of the ways you can use it. We'll also go through how to set up an account with the service called GitHub, so that you can create your very own remote repositories to store your code and configuration. 
+By the end of this course, you'll be able to store your codes history in Git, and collaborate with others in GitHub, where you'll also start creating your own portfolio. 
+
+Nowadays, lots of employers were asked to see your GitHub portfolio when you're interviewing for IT roles. GitHub portfolios give companies an idea of what projects you've worked on and what kind of code you can write. This course will help you get your setup. 
+
+Throughout this course, you'll learn about Git's core functionality, so you can understand how and why it's used in organizations. We'll look at both basic and more advanced features, like branching and merging. We'll demonstrate how having a working knowledge of a VCS like Git can be a lifesaver in emergency situations or when debugging, and we'll explore how to use a VCS to work with others through remote repositories, like the ones provided by GitHub. 
+
+To do all this, and so you can follow along with the exercises in these videos, you'll need to install Git on your computer. This will also let you interact with GitHub, and upload your code there. For the examples in this course, we'll show a bunch of different Python scripts. While you don't need to know any Python to use Git, we do recommend that you have a basic knowledge of the language, so that you can understand the examples and the functionality we'll be demonstrating. If you've done the courses on Python in this program, you're covered. If you haven't, that's okay. But you might need to freshen up your Python skills to follow some of our examples. Also, since all the scripts will use Python 3, you'll need to have Python 3 installed in your computer to run them. For our examples, we're going to use a Linux computer, interacting with the Linux command line through the most common command line tools. Again, if you joined us for the Python courses, you're already familiar with all these concepts. If you're jumping into this program with this course, you might benefit from reviewing some of the most basic Linux commands. 
+
+
+\section{Before Version Control}
+
+	\subsection{Intro to Module 1:}
+	
+	
+	When you work in IT, you manage information across a lot of different files. 
+	You write automation scripts that might evolve over time. For example, you might add new features to your script or take into account additional conditions or modify the scope of systems where the script will be executed. 
+	You also manage configuration related to your infrastructure like the default settings on an application or the IP addresses assigned to the computers in your fleet. This information changes over time as the security requirements increase. The fleet grows or new versions of software gets deployed. 
+	
+	When trying to manage change in IT, it's super important to have detailed historical information for your organization's configuration files and automation code. This let's the administrators see what was modified and when, which can be critical to troubleshooting. 
+	It also provides a documentation trail that will let future IT specialists know why the infrastructure is the way it is, and it provides a mechanism for undoing a change completely. This way, we don't have to undo changes from memory and there's less chance of human error. We'll see this in action when we talk about rollbacks. 
+	
+	Imagine this, your team has added a new feature to a script that checks the health of all the computers that you're responsible for. The new check verifies that the firmware of the computer, also known as the UEFI, is updated to the latest version. When you roll this out, you suddenly realize that half the computers now say they're broken. After some investigation, you discover that the check needs to take into account different computer models. You might be tempted to do a quick code fix, push it to the affected machines right away especially if it seems like an easy fix. 
+	But more often than not, quick fixes include their own bugs because we don't take the time to test a new code properly. So after the first fix, you might end up doing a second or even third emergency push until things are really working correctly. 
+	
+	To avoid these headaches, you can use a version control system to easily roll back your code to the previous version. Since you know that this version was working correctly before the change was made, it would be safe to go back to that one until you had time to fix the code, run some tests, and make sure everything works correctly for all machine models. By releasing code only after properly testing, you avoid having to push quick-fix after quick-fix. 
+	
+	Version control systems let us do this and much more. They are crucial to maintaining a healthy codebase for all kinds of IT resources, and for letting multiple people collaborate on the same coding projects together. We're now going to take our first steps to learning this new tool, which will let us keep track of the changes that we make to our scripts, our configuration files, and any other kind of documents that need to be tracked.
+	
+	We'll start by looking at what people tend to do when they don't know about version control and then check out some related tools, like diff and patch. 
+	Once we have a clear idea of why we need proper version control, we'll jump into our first Git experience. 
+	We'll talk about what Git is and how it does what it does. 
+	To follow along, you'll need to install Git locally on your machine and learn how to use it from the command line. If this sounds a bit scary, don't panic. We'll guide you along the way and you'll be using it in no time. Once you have Git installed in your computer, we'll do an overview of the basic Git workflow which will let you start keeping track of your scripts. So are you ready to start taking control of your code? Here we go.
+	
+	\subsection{Keeping Historical Copies}
+	
+	Have you ever worked on a project that was developing over time? So you occasionally created copies of the work in case you wanted to go back to an earlier version.
+	
+	Maybe you were working in a team and every day you'd email a part of the work to the rest of the team. And then the other members on your team would add their own work, and send it out to the whole team too.
+
+	Or maybe you've worked on a very complex project, that kept changing directions. And you felt that some of the things that got removed one day, might have to be added later on. So anytime you're about to delete a significant part, you made a copy of the whole thing, just in case.
+	
+	If any of this sounds familiar, you've already worked on \textbf{the most primitive form of version control}, keeping historical copies. These copies let you see what the project was like before, and go back to that version if you end up deciding that the latest changes were wrong. They also let you see the progress of the changes over time, and maybe even help you understand why a change was made. We say that this is primitive because it's very manual and not very detailed. First, you need to remember to make the copy. Second, you usually make a copy of the whole thing, even if you're only changing one small part.
+	
+	And third, even if you're emailing your changes to your colleagues, it might be hard to figure out at the end who did what, and more importantly, why they did it. 
+
+	But that said, the principle behind version control is the same.It lets us keep track of the changes in our files. These files can be code, images, configuration, or even a video editing project, whatever it is you're working with. 
+	
+	Throughout this course, we'll see the many ways that Git helps us keep track of our changes, and also how we can use it to collaborate with others or avert changes. We'll use a bunch of terms that have special meanings in the world of version control, but don't let those intimidate you. In the end, all we're doing is having better control over our historical copies. So, say you have two copies of the same code made at different points in time. How can you compare them?	
+	
+	\subsection{Diffing Files}
+	Imagine you had two copies of some code, and you wanted to see what the difference was between them. How would you do it? You could open both files in the editor side by side, look at one then look at the other to spot the differences, but that's super error-prone. We're human and by comparing with our eyes we are bound to miss some differences. Fortunately, there's a better way. You can use some nifty tools that will do this automatically. We can use the \texttt{diff} command line tool to take two files or even to directories, and show the differences between them in a few formats. Let's check it out with an example. We have two files \texttt{rearrange1.py} and \texttt{rearrange2.py} which contain two different versions of the same function. Let's take a look at them using CAT Fig.\ref{W101a-cat}.
+
+\begin{figure} 
+	\caption{Using cat in linux console}
+	\centering
+	\includegraphics[scale=0.2]{W1/W101a.png}
+	\label{W101a-cat}
+\end{figure}
+
+	Can you spot the difference? Maybe you can but it's not super obvious. Let's use the diff command (Fig.\ref{W101b-diff}) so that we don't have to strain our eyes trying to spot it.
+
+	When we call the \texttt{diff} command, we get only the lines that are different between two files. It's much easier to find the difference when we just have two lines. See the symbols at the beginning of each of those lines? The \textit{less than} $<<$ symbol tells us that the first line was removed from the first file, and the \textit{greater than} $>>$ symbol tells us that the second line was added to the second file. In other words, the old line got replaced by the new one. In this example, we had one line that was replaced with a new one. This is a common change when modifying code, but not the only possibility. 
+	
+	
+	\begin{figure} 
+		\caption{Using diff in linux console}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101b.png}
+		\label{W101b-diff}
+	\end{figure}	
+	
+	
+	Let's check out another example. Here there are more changes going on.
+	We can see that \texttt{diff} (Fig.\ref{W101c-diff})splits the changes in two separate sections. The section that starts with \texttt{5c5,6} shows a line in the first file that was replaced by two different lines in the second file. The number at the beginning of this section indicates the line number in the first and second files. The \texttt{c} in between the numbers means that a line was \textbf{changed}. The section that starts with \texttt{11a13,15} shows three lines that are new in the second file. The \texttt{a} stands for, you guessed it, \textbf{added}, but that block looks a bit strange doesn't it? It seems like we're adding a return and an if condition but nobody for the if block. What's up with that? 
+	
+	\begin{figure} 
+		\caption{Using \texttt{diff} in linux console}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101c.png}
+		\label{W101c-diff}
+	\end{figure}
+	
+	
+	To understand this better we can use the \textbf{dash u} (\texttt{-u}) flag to tell \texttt{diff} to show the differences in another format. Let's check that out (Fig.\ref{W101d-diff-u}).
+	
+	\begin{figure} 
+		\caption{Using \texttt{diff -u} in linux console}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101d.png}
+		\label{W101d-diff-u}
+	\end{figure}
+
+	This unified format is pretty different from the one that we saw before. It shows the change lines together with some context, using the \textbf{minus sign} (\texttt{-}) to mark \textbf{lines that were removed}, and the \textbf{plus sign} (\texttt{+}) to mark \textbf{lines that were added}. 
+	
+	The extra context let's us better know what's going on with the change that we're diffing. We can see that the new file actually has a completely new \texttt{if} block that's part of a chain of conditionals that looks very similar, and that's why with the \texttt{diff} output that we saw before, it was a little confusing which lines had been added. There are a lot of tools out there to compare files. Diff is the most popular one, but not the only one available. For example, \texttt{wdiff} \textbf{highlights the words that have changed in a file instead of working line by line} like diff does. To help us even more, there are bunch of graphical tools that display files side by side and highlight the differences by using color. Some examples of this include: meld, KDiff3, or vimdiff. We can use these tools to give better contexts to the changes that we see. We've talked about how we can see differences between two files, now how can we use those differences to apply changes? That's coming up in the next video.
+	
+	\subsection{Applying Changes}
+	
+	Imagine a colleague sends you a script with a bug and asked you to help fix the issue. Once you understood what was wrong with the script, you could describe to them what they need to change. 
+	Something like, "\textit{Well, you can only return values inside functions. I think you meant to use sys.exit instead. Also, you're converting to gigabytes twice, so your script will always fail.}" But this could still be hard for them to understand if the code is complex. 
+	
+	To make the change clear, you could send them a \texttt{diff} with the change so that they can see what the modified code looks like. To do this, we typically use a command line \verb|like diff-u old_file new_ file > change.diff|. As a reminder, the \textbf{greater than sign redirects the output of the diff command to a file}. So with this command, \textbf{we're generating a file called} \texttt{change.diff} \textbf{with the contents of} \texttt{diff-u} \textbf{command}. 
+	By using the \texttt{-u} flag, we include more context which helps the person reading the file understand what's going on with the change. The generated file is usually referred to as a \textbf{diff file} or sometimes a \textbf{patch file}. 
+	It includes all the changes between the old file and the new one, plus the additional context needed to understand the changes and to apply those changes back to the original file. 
+	
+	Now, say you're the one receiving a \texttt{diff file} with a change and you want \textbf{to apply it to a script you wrote}. You could read the diff file you receive carefully and then manually go through the file that needs to be changed, and apply the modifications. But it sounds like a lot of manual work that could be automated, don't you think? Well, it sure is. There's a command called \texttt{patch} to do exactly this. \textbf{Patch takes a file generated by diff and applies the changes to the original file}. Let's check this out in an example. Say we have a small script that checks whether the computer is under too much load, like this one.
+	
+	This script uses the \texttt{psutil} module to check the percentage of the CPU that's currently in use. When the load is above a threshold, in this case 75 percent, it prints a message with an error. When it's under the threshold, it says that everything's okay. 
+	Now, we've shared this script with a few colleagues and one of them tells us that the script doesn't work correctly. Even if a computer is completely overloaded, the script will say that everything's okay. Our colleague is so helpful that they sent us a \texttt{diff} with the fix for our problem. Let's check that one out (Fig.\ref{W101e}). 
+	
+	\begin{figure} 
+		\caption{Python file and its \texttt{diff} file.}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101e.png}
+		\label{W101e}
+	\end{figure}
+	
+	We can see that our colleague made two changes. They added a one as a parameter to the CPU percent function and they added a debugging line, that prints the value returned by the function. Our colleague explains that by calling the CPU percent function without a parameter, we were not averaging over a period of time, and so the call always returns zero. 
+	So we have the \texttt{diff file} and we want to apply it to our script. How do we do that? We'll use the \texttt{patch} command. 
+	We'll pass the name of the file that we want to patch in this case, \verb|cpu_usage.py|, as the first parameter to the command and then we'll provide the \texttt{diff} file through standard input. Do you remember how to do that? We will \textbf{use the less than symbol to redirect the contents of the file to standard input}. Let's check this out (Fig.\ref{W101f}).
+	
+	\begin{figure} 
+		\caption{Patching a file from diff file.}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101f.png}
+		\label{W101f}
+	\end{figure}
+
+	So we told patch to apply the changes that come from \verb|cpu_usage.diff| to our \verb|cpu_usage.py| file. We get one single line that says the file was patched, which means that we've successfully applied the changes. Let's verify that by looking at the contents of our script.
+
+	Nice. We see that our file was modified with the changes that we got from our colleague. The CPU percent function is being called with a parameter of one and the debugging line is printed. Once we're happy with the script, we could remove the debugging line. But for now, we'll leave it in there. You might be wondering, why go through all this trouble diffing, and patching, and not just send the whole file instead? 
+	There are a few reasons for this: 
+	
+	The main reason is that the original code could have changed. In our example, it's possible that the code our colleague was using to prepare the fix wasn't the latest version. By \textbf{using a diff instead of the whole file, we can clearly see what they changed}, no matter which version they were using. The \textbf{patch command can detect that there were changes made to the file} and will do its best to apply the diff anyways. It won't always succeed but in many cases it will. 
+	
+	Another reason is \textbf{structure}. In this case we're patching a single small file. But sometimes, you might be modifying a bunch of large files inside of a huge project. Say you are changing four files in a project tree that contain 100 different files, arranged in different directories according to what they do. If you were to send the whole files, you'd need to specify where those files were supposed to be placed. As we called out, we can diff whole directory structures and in that case \textbf{the diff file can specify where each change file should be without us having to do any manual juggling}.
+	
+	Cool right? Okay, great work. We've now seen how to generate diff files and how to apply their contents with the patch command. In the next video, we'll put all this together to look at a real-world example of how to use diff and patch.
+	
+	\subsection{Practical Application of diff and patch}
+		
+	Imagine this, a colleague is asking our help with fixing a script named \verb|disk_usage.py|. The goal of the script is to check how much disk space is currently used, and print an error if it's too little space for normal operation. But the script is currently broken because it has a few bugs. We’ll help our colleague fix those bugs to demonstrate how to use \texttt{diff} and \texttt{patch}. Before we change anything, let’s make a couple copies of the script. We'll add \verb|_original| to one copy , which we’ll keep unmodified and use for comparison (\verb|cp disk_usage.py disk_usage_original.py|) and \verb|_fixed| to the other copy (\verb|cp disk_usage.py disk_usage_fixed.py|), which we’ll use to repair our fix.
+	
+	Okay, now that we have our copies, we'll edit the \verb|_fixed| version and actually fix it. This file has a bunch of code. Before we try to understand what it does and what's wrong with it, let's execute it and see what we get (\texttt{SyntaxError: 'return' outside function}).
+	
+	
+	The Python interpreter isn't too happy. It's complaining that there's a return outside of function. And if we look at the code, we can clearly see that there's a return that's not inside any function (Fig. \ref{W101g}).
+	
+	\begin{figure} 
+		\caption{return outside function.}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101g.png}
+		\label{W101g}
+	\end{figure}
+	
+	You might remember that in Python, we can only use return statements inside functions. So how do we fix this? There's a couple options. We could turn the current code into a function and then call that function from the main part of our script. Or we could use \verb|sys.exit| to make the \texttt{return} number of the exit code of our script, which is the code that causes a program to exit with the corresponding exit value. 
+	
+	For now, let's go with the second option (Fig. \ref{W101h}).
+	
+	\begin{figure} 
+		\caption{Changes in \texttt{fixed} file.}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101h.png}
+		\label{W101h}
+	\end{figure}
+	
+	Okay, we've made the change. Let's execute this new version of our script.
+	
+	Darn, we fixed the syntax error, but now the script is telling us we don't have enough space on our disk. But we know that we actually do have some free space, right? What's up with that? If you look closely at the code, you might notice that \textbf{the script is converting to gigabytes twice}.
+	
+	The function call to \verb|check_disk_usage| is passing 2 times 2 double star 30 $2**30$ (blue line). You might remember that the double star operator (\verb|**|) is used to calculate powers. In this case, 2 to the power of 30, which is how many bytes are in a gigabyte. So, this would be 2 gigabytes, but that be if the \verb|check_disk_usage| function was expecting a value in bytes. If we look at the code of the function, we can see that it's already dividing the amount of free bytes by 2 to the power of 30. So in other words, \textbf{we're doing the gigabyte conversion twice}. Once when calling the function and once inside the function. We need to get rid of one of them. Let's change how we call the function (Fig. \ref{W101i}).
+	
+	\begin{figure} 
+		\caption{Changes in \texttt{fixed} file.}
+		\centering
+		\includegraphics[scale=0.2]{W1/W101i.png}
+		\label{W101i}
+	\end{figure}
+
+	Okay, let's try it out again.
+	
+	It works now. Okay, now we need to send a fixed to our colleague so that they can fix their script.
+	
+	To do that, we'll use a technique we just learned to generate a diff file, like this \verb|diff -u disk_usage_original.py disk_usage_fixed.py > disc_usage.diff|. Let's check the contents of the \texttt{diff} using the \texttt{cat} command... 
+	
+	Awesome. This seems to have what we want. So this is what we need to send to our colleague to have them patch their file. How would they do that? They would run the patch command like this \verb|patch disk_usage.py < disk_usage.diff|.
+	
+	By calling patch with the diff file, we've applied the changes that were necessary to fix the bugs. Let's check that \verb|disk_usage.py| now executes successfully.
+	
+	Success. So we've now seen how we can look at differences between files, generate diff files together to gather our changes, and then apply those changes using patch. But this is still a very manual process, where version control systems can really help. But before we jump into that, in the next cheat sheet, you'll find a summary of the commands we just covered. So check that out and then head over to the practice quiz to make sure you've got a grasp on all this.
+	
+	
+
+
+
+
+\section{Version Control Systems}
+
+	\subsection{What is version control}
+	
+	We've seen up till now, how we can use existing tools to extract differences between versions of files and apply those changes back to the original files. Those tools are really useful. But most of the time, we won't be using them directly. Instead, we'll use them through a \textbf{Version Control System}, or \textbf{VCS}. A Version Control System keeps track of the changes that we make to our files. By using a VCS, \textbf{we can know when the changes were made and who made them}. It also \textbf{lets us easily revert a change} if it turned out not to be a good idea. 
+	
+	It \textbf{makes collaboration easier by allowing us to merge changes from lots of different sources}. At first-look, a Version Control System can seem like a complicated, possibly intimidating tool. But if you look closer, you'll see that it's really just a system that stores files. 
+	However, unlike a regular file server which only saves the most recent version of a file, a VCS keeps track of all the different versions that we create as we save our changes. There are many different version control systems, each with their own implementation and with their own advantages and disadvantages. But, no matter how the VCS is implemented internally, they always access the history of our files. \textbf{Let us retrieve past versions of the file or directory and see who changed which files, how each file was changed and when the file was changed}. 
+	
+	On top of this, we can make edits to multiple files and treat that collection of edits as a single change which is commonly known as a, \texttt{commit}. A VCS even \textbf{provides a mechanism to allow the author of a commit to record why the change was made, including what bugs, tickets or issues were fixed by the change}. 
+	This information can be a lifesaver when trying to understand a complex series of changes, or to debug some obscure issue. So, be sure to record this extra info in your commits to be truly committed to better code. In any organization that produces software, a VCS is a key part of managing the code. 
+	
+	Files are usually organized in \textbf{repositories} which contains separate software projects or just group all related code. If there's a lot of people involved in developing software, some developers may have access to only some of the repositories. 
+	A single repository can have as little as one person using it. And it can go up to thousands of contributors. And, as we called that earlier, a Version Control System can be used to store much more than just code. We can use it to \textbf{store configuration files, documentation, data files, or any other content that we may need to track}. Because of the way tools like \texttt{diff} and \texttt{patch} work, a VCS is especially useful when tracking text files, which can be compared with diff and modified with patch. We can also store images, videos or any other complex file formats in a VCS, but, it won't be easy to check the differences between versions when comparing these file formats. It might not be possible to automatically merge changes made to older versions of a file. You now have a basic idea of what a Version Control System is, and how it works You might be asking yourself, do I really need this? Can't I just keep making backups of my code once in awhile? We'll answer that in our next video
+	
+	\subsection{Version Control and automation}
+	
+	At first glance, using a VCS might seem like a lot of work for an IT specialist to set up and learn. It might especially seem like \textbf{overkill}, if you're the only member of your IT team that writes code or maybe even the only member period. 
+	So can a VCS help, even if you don't need to share your scripts or collaborate on them with others? The short answer is yes. A VCS can be invaluable, even in a one-person IT department. A VCS stores your code and configuration. It \textbf{also stores the history of that code and configuration}. A version control system can function a lot like a time machine, giving you insights into the decisions of the past. Whenever you write a commit message, after making a change, it's as if the current version of yourself is explaining your decisions to a future you or others who might work on the same scripts and configurations in the future. This can help you avoid finding yourself staring at a piece of code that you or someone else wrote three months ago and puzzling over how it works or even why it exists. 
+	
+	With a VCS, you can v\textbf{iew, track and select snapshots} from the history of your project. So nothing you do is lost, and since we can use a VCS to store both code and configuration files, we can make the overall IT systems more scalable and reliable. 
+	
+	For example, let's say you've stored the \texttt{DNS zone} file for your company in a VCS and in case you don't remember, a DNS zone file\texttt{} \textbf{is a configuration file that specifies the mappings between IP addresses and host names in your network}. When you update the zone information, always use good explanatory commit messages. That way, you'll have access to meta information about your new IP addresses and host names present in the zone file. Like when they were added and for what purpose. 
+	If anything breaks after you add a new entry, you can rely on the VCS to tell you what the file looked like before the change. You can then revert to the old version quickly, so you can fix the problem fast and figure out what went wrong later. This functionality enhances the reliability of systems you operate. Because of the audit trail provided by the VCS, you know exactly what version of the zone file to rollback to, which reduces the time it takes to fix the problem. 
+	
+	It's generally better to quickly roll back first and stop errors before spending time figuring out what went wrong. You can curb the fix after the bleeding has stopped. Figuring out the bug might take up valuable time or worse, your first attempt at a solution can have its own bugs. 
+	
+	Let's look at a different example. The configuration for a \texttt{DHCP damon} can be replicated in two or more machines, where one acts as a primary server and the other one acts as standby machine. The standby machines won't do much while the primary is up. But if the primary goes down for any reason, a standby machine can become primary and start responding to \texttt{DHCP queries}. For this to work, the configuration files on all machines need to be identical. This is because the \texttt{DHCP protocol} doesn't provide a way for standby machines to get an up-to-date version of the configuration files and the way \texttt{DNS} does. 
+	
+	To deal with this, we can keep the up-to-date version of the DHCP configuration in a version control system and have the machines download the configuration from the VCS. This means all the machines will have the exact same files. That's already handy enough. But after using it for a while, you're bound to see other benefits. Say you get an urgent alert over the weekend, telling you that your DHCP server isn't responding to any queries. You look at the history of the changes and you find that one of the changes added on Friday evening, included a duplicated entry causing the server to misbehave. By using a VCS, you can easily roll back the change and have the servers back to health in no time. 
+	
+	You might come across a second unexpected benefit, when it's time to replace the server with a new one. By having all the server configuration and a version control system, it's much easier to automate the task of deploying a new server. Are you starting to see how useful version control systems can be? You might even be thinking of some situations when having your files in VCS, would have saved you a few headaches. As we said in the beginning, in this course, we'll use Git, which is one of the most popular version control systems in use today. Up next, we'll learn a bit about the history of Git and what makes it so special.
+	
+	\subsection{What is Git}
+		
+	Git is a VCS created in 2005 by Linus Torvalds. The developer who started the Linux kernel.
+	
+	Git is a free open source system available for installation on Unix based platforms, Windows and macOS. Linus originally created get to help manage the task of developing the Linux kernel. This was difficult because a lot of geographically distributed programmers were collaborating to write a whole bunch of code. Linus had some requirements for the way that the system worked, and its performance that weren't being met by the VCS tools at a time. So he decided to write his own. 
+	
+	Git is now one of the most popular version control systems out there and is used in millions of projects. Unlike some version control systems that are centralized around a single server, Git \textbf{has a distributed architecture}. This means that \textbf{every person contributing to a repository has full copy of the repository on their own development machines}.
+	
+	Collaborators can share and pull in changes that others have made as they need. And \textbf{because the repositories are all local to the computer being used to create the files, most operations can be done really fast}. 
+	If you want to collaborate with others, it usually makes sense to set up a repository on a server to act as a kind of hub for everyone to interact with. But Git doesn't rely on any kind of centralized server to provide control organizations to its workflow. Git \textbf{can work as a standalone program as a server and as a client}. This means that \textbf{you can use Git on a single machine without even having a network connection}. Or you can use it \textbf{as a server on a machine where you want to host your repository}. And then you can use Git \textbf{as a client to access the repository from another machine} or \textbf{even the same one}.
+	
+	Git clients can communicate with Git servers over the network using \textbf{HTTP}, \textbf{SSH} or Git's own special protocol. If you're curious about diving deeper into Git architecture or communication protocols, we put a link for more information in the next reading. So you can use Git with or without a network connection. You can use it for small projects with like one developer or huge projects with thousands of contributors. You can use it to track private work that you can keep to yourself or you can share your work with others by hosting a code on \textbf{public servers like Github, Gitlab} or others. Are you starting to see how powerful Git can be?
+	
+	When looking for information online you might notice that the official Git website is called \verb|git-scm.com|. And wonder what's the \textbf{SCM} at the end for? It's actually another acronym similar to VCS. It stands for \textbf{Source Control Management}. 
+	While both terms mean the same, we generally prefer VCS, because as we call that already, these systems can actually be used to store much more than just source code. In this course we chose Git for its popularity, multi platform support and robust set of features. 
+	As with most things in the IT world, though, there are plenty of other tools that can be used to accomplish the same task. There are other VCS programs like Subversion or Mercurial. Feel free to experiment with alternatives if you think another VCS might better serve your needs. But before we jump into how to use Git, let's go through another quick quiz, to check that everything up until now is making sense.
+	
+	\subsection{Installing Git}
+	
+	
+	In this course, we'll cover many different things that you can do with Git. To follow along, you'll need to install Git on your computer. On top of this, we'll show you how to interact with Git through the command line. 
+	So if you aren't yet already familiar with the command line, this is your opportunity to brush up. Our examples will be shown on a computer running Linux, but you can use Git on any operating system. There are versions of Git available for all popular operating systems. So before we get any further, let's get Git installed on your computer. 
+	
+	The first step is to check whether you already have it installed. You can do this by running \verb|git --version|. If you're running a version number higher than \verb|2.20|, then you can just use that one. If you get an error message or an older version number, you'll need to install the current version. If you use a package management system like \texttt{apt} or yum on Linux, \texttt{Chocolatey} on Windows, or \texttt{Homebrew} on Mac OS, you can just install Git through that. 
+	
+	If you don't use a package management system, then you can download the latest executable installer from the official website and deploy it on your computer. On Linux, installing and using Git is pretty straightforward. You can install it with the command \texttt{apt install git} or \texttt{yum install git}, and after that, you'll have Git installed and ready to use. On Mac OS, you can even have it installed when you run \verb|git --version|. If Git isn't installed, this command will ask you if you want to install it and then download it and install it for you. Alternatively, you can also download it from the website and install it by following the prompts. Once it's installed, you'll be able to use it from the command line just like any other tool. 
+	
+	On Windows, after downloading and executing the installer, you'll need to go through a bunch of different configuration options. 
+	These options come with preselected defaults that usually makes sense to just keep. Pay attention to the editor question though. You'll probably want to change the editor to one that you feel comfortable with, like \textit{Notepad++} or \textit{Atom}. 
+	One interesting thing about the Windows installation is that it comes preloaded with an environment called \textbf{MinGW64}. This environment lets us operate on Windows with the same commands and tools available on Linux. So you can practice some Linux command line tools on your Windows machine. After installing Git on your Windows machine, you'll be able to use Git from the Linux command line. 
+	If you selected the default option for the path environment question, you'll be able to also run it from the PowerShell command line. If you want to understand more about each option involved in the installation on Windows, check out the optional video where we will talk about the available options and when you might want to select something different from the default. Throughout this course, we'll talk about how to do things from the \texttt{command line}. Some integrated developer environments or IDEs let us interact with Git through graphical interfaces. It's fine to use those if you feel more comfortable with them. We'll focus on the command line because it's standard and also because \textbf{once you've mastered the command line, you'll definitely be able to use any graphical tool out there}. In the next video, we'll look into the options you can set when installing Git on a Windows machine. This video is optional. If you've already set up Git on your computer, you can jump ahead to the next video.
+	
+	\subsection{Installing Git on Windows}
+	
+	
+	In this video, we'll show you how you can install Git on Windows. We'll dive into the different options that you can select and what they all mean. We'll start by downloading the latest version of the software from the gitforwindows.org website.
+	
+	The software package we get includes a bunch of other tools that might come in real handy. It comes with a Bash emulation environment, where we can run all the Git commands we'll explain in this course. And a bunch of Unix like utilities that we'll show in this and other courses. This bundle also includes a graphical user interface to interact with Git. We won't look at it during this course, but you can experiment with it on your own. All right, we've downloaded the file, let's get it installed. First, let's start by clicking Keep.
+	
+	The first window we get is the license of the software. Git is released under the GPL version two license, which is a free software license. This means that if we want, we can look at Git's code to learn how it works, and we can even modify it to do something different.
+	
+	All right, let's accept this license and continue with the setup.
+	
+	The first option we get is the installation path, we'll keep it as is. This window lets us select additional components to add to our Git installation. By default, Git integrates with the Windows Explorer to let us run Git Command Line or the Git Graphical Interface in the current folder. This software bundle comes with an extension for improving the support of how large files, like audio or video files, get stored in the version control system. It's a good idea to keep this enabled. The installer will also register the Git configuration files as files that should be opened with a text editor, and the \verb|.sh files| as files that should be executed with Bash. All of this makes sense, so we'll keep these options selected. If you want, you can also enable some of the other options, that will cause the icons to be displayed on the desktop, true type fonts to be used in the console, or software to automatically check for updates. All right, let's keep going.
+	
+	We get prompted for the name of the folder where we want to create all the shortcuts. \texttt{ } is fine as the name for this, so let's continue.
+	
+	Okay, now's the time to choose the editor. This is the option that you'll most likely want to adjust. You want to select an editor that you're comfortable with. The installer already has a list of possible options that you could choose here, like Notepad++, Visual Studio Code, or Sublime Text. And we can even select any other editor we wanted by entering the path to the editors executable file. For this course, we'll be using Atom in all of our examples. So let's choose Atom for this installation. Heads up, the bundle doesn't ship with any of these graphical editors installed, you'll need to install the one you want separately.
+	
+	All right, we're now asked to choose how we want to adjust the PATH environment. This option let us decide how we want to execute Git from the command line.
+	
+	Selecting the first option (\texttt{Use Git from Git Bash only}) will make Git only accessible through the embedded command line that is shipped with the bundle. The second option (\texttt{Git from the command line and also from 3rd-party software}), the one that's pre-selected, allows us to execute Git from the embedded command line and from the Windows Command Prompt. The third option (\texttt{Use Git and optional Unix tools from the Command Prompt}) will add the Unix-like tools shipped together with Git to the Windows Command Prompt. If you choose this option, any commands that have the same name as those in the OS will then come from the bundle and not the basic OS. We'll keep the second option selected, as it's the one that's most convenient for us, while not interfering with the local tools.
+	
+	This window lets us choose how we want to validate the SSL certificates used for HTTPS connections. We can choose to use the OpenSSL library that shipped together with Git, or use the native Windows library. You'll want the second option if you need to interact with your company's internal systems. As we'll only be interacting with GitHub, we'll keep the default option selected (\texttt{Use the OpenSSL library}).
+	
+	This window lets us select what we want to do about line endings. The characters used to indicate the end of the line are different between Windows, Linux, and Mac OS. 
+	So the Git software bundle lets us decide how we want to handle these differences. The default is to store Windows line endings on the local files, but use Unix line endings in the files stored by Git (\texttt{Checkout Windows-style, commit Unix-style line endings}).
+	
+	This works well when you're using your Windows computer to collaborate with others using a different OS. The second option (\texttt{Checkout as-is, commit Unix-style line endings}) is to keep the line endings unchanged when copying the files locally, and use Unix line endings for the files stored in Git. This would work well if you're using a Unix like OS, or if you're only editing through Unix-like editors on Windows. The third option (\texttt{Checkout as-is, commit as-is}) is to not do any conversions. This option doesn't work well if you're trying to work with people using a different OS. So it's only recommended if all your collaborators will be running the same OS as you. All right, let's keep the first one selected and move on.
+	
+	This window lets us configure the terminal emulator. The software bundle ships with its own terminal emulator (\texttt{Use MinTTY}) that includes a bunch of nice features, like better Unicode support and a long history of commands that we can scroll. We'll keep that one selected, but if you feel like you're more comfortable with the Windows default console window, you can choose that one (\texttt{Use Windows' default console window}).
+	
+	All right, we have a few extra options that we can choose to enable if we want. We'll keep these as they are, that way we'll get the performance improvements of letting Git do file system caching (\texttt{Enable file system caching}), and we'll be able to use Git's credential manager (\texttt{Enable Git Credential manager}). We don't need to use symbolic links in our repositories (\texttt{Enable symbolic links}), so we'll leave that disabled.
+	
+	Finally, we get one last prompt before installing, which lets us choose which experimental features we want to select. The features offered here will change with time, as some get adopted and others get dropped. You can decide whether you want to work on the bleeding edge, or you'd rather go with what's already well tested. We aren't feeling too adventurous today, so we won't enable the experimental features. We'll just click install here to get our installation started.
+	
+	All right, Git is installing on our machine. It'll take a while for it to complete. Once it's done, we'll have all the Git goodness at our fingertips. In case you need a bit more help, you can find links for more information regarding Git installation in our next reading.
+
+\section{Using Git}
+
+	\subsection{First Steps with Git}
+	
+	
+	When starting with Git, there are a bunch of concepts that we need to learn to understand how things are organized and how our files are tracked. Over the next few videos, we'll introduce some of the main Git concepts. If any of these seem confusing at first don't panic, we'll dive into all of them as we expand our Git knowledge. Let's start by setting some basic configuration. Remember when we said that a VCS tracks who made which changes, for this to work, we need to tell Git who we are. We can do this by using the Git config command and then setting the values of user.email and user.name to our email and our name like this.
+	
+	We use the dash dash global flag to state that we want to set this value for all git repositories that we'd use. We could also set different values for different repositories. With that done, there are two ways to start working with a git repository. We can create one from scratch using the git init command or we can use the git clone command to make a copy of a repository that already exists somewhere else. We'll talk about remote repositories later in the course. For now, let's start by creating a new directory and then a git repository inside that directory.
+	
+	So when we run git init we initialize an empty git repository in the current directory. The message that we get mentions a directory called. git. We can check that this directory exist using the ls-la command which lists files that start with a dot. We can also use the ls-l.git command to look inside of it and see the many different things it contains. This is called a Git directory. You can think of it as a database for your Git project that stores the changes and the change history. We can see it contains a bunch of different files and directories. We won't touch any of these files directly, we'll always interact with them through Git commands. So whenever you clone a repository, this git directory is copied to your computer. Whenever you run git init to create a new repository like we just did, a new git directory is initialized. The area outside the git directory is the working tree. The working tree is the current version of your project. You can think of it like a workbench or a sandbox where you perform all the modification you want to your file. This working tree will contain all the files that are currently tracked by Git and any new files that we haven't yet added to the list of track files. Right now our working tree is empty. Let's change that by copying the disk usage that py file that we saw in an earlier video into our current directory. We now have file and a working tree but it's currently untracked by Git. To make Git track our file, we'll add it to the project using the git add command passing the file that we want as a parameter. With that, we've added our file to the staging area. The staging area which is also known as the index is a file maintained by Git that contains all of the information about what files and changes are going to go into your next command. We can use the git status command to get some information about the current working tree and pending changes. Let's check that one out.
+	
+	We see that our new file is marked to be committed, this means that our change is currently in the staging area. To get it committed into the.git directory, we run the git commit command. Let's try that now.
+	Play video starting at :4:7 and follow transcript4:07
+	When we run this command, we tell Git that we want to save our changes. It opens a text editor where we can enter a commit message. If you want, you can change the editor used to your preferred editor. In our case, this computer has nano configured as a default editor. The texts that we get tells us that we need to write a commit message and that the change to be committed is the new file that we've added. We'll deep dive into commit messages later. For now, let's enter a simple description of what we did which was to add this one file and then exit the editor saving our commit message and with that we've created our first git commit. Up next, we'll talk more about the life cycle of each track file in a git repository.
+	
+	\subsection{Tracking Files}
+	
+	In our last video, we mentioned that any Git project will consist of three sections. The Git directory, the working tree, and the staging area. The Git directory contains the history of all the files and changes. The working tree contains the current state of the project, including any changes that we've made. And the staging area contains the changes that have been marked to be included in the next commit. This can still be confusing. So it might be helpful to think about Git as representing your project. Which is the code and associated files and a series of snapshots. Each time you make a commit, Git records a new snapshot of the state of your project at that moment. It's a picture of exactly how all these files looked at a certain moment in time. Combined, these snapshots make up the history of your project, and it's information that gets stored in the Git directory. Now, let's dive into the details of how we track changes to our files. When we operate with Git, our files can be either tracked or untracked. Tracked files are part of the snapshots, while untracked files aren't a part of snapshots yet. This is the usual case for new files. Each track file can be in one of three main states, modified, staged or committed. Let's look at what each of these mean.
+	
+	If a file is in the modified state, it means that we've made changes to it that we haven't committed yet. The changes could be adding, modifying or deleting the contents of the file. Git notices anytime we modify our files. But won't store any changes until we add them to the staging area.
+	Play video starting at :1:44 and follow transcript1:44
+	So, the next step is to stage those changes. When we do this, our modified files become stage files. In other words, the changes to those files are ready to be committed to the project. All files that are staged will be part of the next snapshot we take. And finally, when a file gets committed, the changes made to it are safely stored in a snapshot in the Git directory. This means that typically a file tracked by Git, will first be modified when we change it in any way. Then it becomes staged when we mark those changes for tracking. And finally it will get committed when we store those changes in the VCS. Let's see this in action in our example Git repo. First, let's check the contents of the current working tree using ls-l. And then the current status of our files using the Git status command. When we run Git status, Git tells us a bunch of things, including that we're on the master branch. We'll learn about branches later in the course. For now, notice how it says that there's nothing to commit and that the working tree is clean. Let's modify a file to change that.
+	
+	For example, we'll just add periods at the end of the message that our script presents to the user.
+	
+	So, now that we've made the change, let's call Git status again and see the new output Again, Git tells us a lot of things, including giving us some tips for commands that we might want to use. These tips can come in real handy, especially when we're familiarizing ourselves with Git. See how the file we changed is now marked as modified? And that it's currently not staged for commit?
+	
+	Let's change that by running the Git add command, passing the disk usage py file as a parameter.
+	
+	When we call Git add, we're telling Git that we want to add the current changes in that file to the list of changes to be committed. This means that our file is currently part of the staging area, and it will be committed once we run the next Git command, Git commit. In this case, instead of opening up an editor, let's pass the commit message using the dash m flag, stating that we added periods at the end of the sentences.
+	Play video starting at :4:45 and follow transcript4:45
+	So, we've now committed our stage changes. This creates a new snapshot in the Git directory. The command shows us some stats for the change made. Let's do one last status check.
+	
+	We see that once again, we have no changes to commit. Because the change we made has gone through the full cycle of modified, staged and committed. So to sum up, we work on modified files in our working tree. When they're ready, we staged these files by adding them to the staging area. Finally, we commit the changes sitting in our staging area, which takes a snapshot of those files and stores them in the database that lives in the Git directory. If the way Git works is not totally clear yet, don't worry. It will all sink in with a bit more practice. In our next video, we'll put this all together and go over the typical workflow when working with Git
+	
+	\subsection{The Basic Git Workflow}
+	
+	
+	In earlier videos, we discussed some of the basic concepts involved in working with Git. We saw that each repository will have a Git directory, a working tree, and a staging area. And we called out that files can be in three different states, modified, staged, and committed. Let's review these concepts one more time by looking at the normal workflow when operating with Git on a day to day basis. First, all the files we want to manage with Git must be a part of a Git repository. We initialize a new repository by running the git init command in any file system directory. For example, let's use the mkdir command to create a directory called scripts, and then change into it and initialize an empty Git repository init. Our shiny new Git repository can now be used to track changes to files inside of it. But before jumping into that, let's check out our current configuration by using the git config -l command.
+	
+	There's a bunch of info in there, and we won't cover all of it. For now, pay special attention to the user.email and the user.name lines, which we touched on briefly in an earlier video. This information will appear in public commit logs if you use a shared repository. For privacy reasons, you might want to use different identities when dealing with your private work and when submitting code to public repositories. We'll include more details about changing this information in our next reading. Okay, our repo is ready to work, but it's currently empty. Let's create a file in it, we'll start with a basic skeleton for a Python script, which will help us demonstrate the Git workflow. As with any Python script, we'll start with the shebang line. For now, we'll add an empty main function, which we'll fill in later. And at the end, we'll just call this main function.
+	
+	All right, we've created our file. This is a script that we'll want to execute, so let's make it executable. And then let's check the status of our repo using git status command.
+	
+	As we called out before, when we create a new file in a repository, it starts off as untracked. We can make all kinds of changes to the file, but until we tell Git to track it, Git won't do anything with an untracked file. Do you remember what command we have to use to make Git track our file? That's right, we need to call the git add command.
+	
+	This command will immediately move a new file from untracked to stage status. And as we'll see later, it will also change a file in the modified state to staged state. Remember that when a file is staged, it means it's been added to the staging area and it's ready to be committed to the Git repository. To initiate a commit of staged files, we issue the git commit command. When we do this, Git will only commit the changes that have been added to the staging area, untracked files or modified files that weren't staged will be ignored.
+	
+	Calling git commit with no parameters will launch a text editor, this will open whatever has been set as your default editor.
+	
+	If the default editor is not the one you'd like to use, there are a bunch of ways to change it. We'll include more info about changing the default editor in the next reading. For now, let's edit our message with Nano, which is the current default for this computer. We'll say that our change is creating an empty all_checks.py file, then save and exit.
+	
+	Voila! We've just recorded a snapshot of the code in our project, which is stored in the Git directory. Remember that every time we commit changes, we take another snapshot, which is annotated with a commit message that we can review later.
+	
+	Okay, that's how we add new files, but usually we'll modify existing ones. So let's add a bit more content to our script to see that in action. We'll add a function called check_reboot, that will check if the computer is pending a reboot. To do that, we'll check if the run/reboot-required file exists.
+	
+	This is a file that's created on our computer when some software requires a reboot. And of course, since we're using os.path.exists, we need to add import os to our script.
+	
+	All right, we've added a function to our file. Let's check the current status using git status again.
+	
+	Our file's modified, but not staged. To stage our changes, we need to call git add once again.
+	
+	Okay, our changes our now staged. What do we need to do next? You got it, we have to call git commit to store those changes to the Git directory. This time, we'll use the other way of setting the commit message. We'll call git commit -m, and then pass the commit message that we want to use. So in this case, we'll say that we've added the check_reboot function.
+	
+	With that, we've demonstrated the basic Git workflow. We make changes to our files, stage them with git add, and commit them with git commit. Are you starting to feel more comfortable with this process, and see how it fits within the rest of your tasks?
+	
+	If there's anything that's not totally clear yet, remember, that the only way to get familiar with these concepts is practice. Feel free to try these examples out on your computer as we go along, until you get comfortable with these commands.
+	
+	Up next we'll talk more about how to write useful commit messages.
+	
+	\subsection{Anatomy of a Commit Message}
+	
+	In earlier videos, we saw how we can commit snapshots of changes to the Git repository. Let's now talk a little bit more about what makes a good commit message. Writing a clear informative commit message is important when you use a VCS, future you or other developers or IT specialists who might read the commit message later on will really appreciate the contextual information as they try and figure out some of the parts of the code or configuration. So what makes a good commit message? It can be helpful to keep your audience in mind when you write commit messages. What would someone reading a message weeks or months from now want to know about the changes you've made? What might be especially important or tricky to understand about them? Is there extra information that might help the reader out, like links to design documents or tickets in your ticketing system? Similarly to how style guides exist for writing code, your company might have specific rules for you to follow when you write commit messages. Even if they don't, it's good to use a few general guidelines to make sure your commit messages are as clear and useful as possible. A commit message is generally broken up into a few sections. The first line is a short summary of the commit followed by a blank line. This is followed by a full description of the changes which details why they're necessary and anything that might be especially interesting about them or difficult to understand. When you run the git commit command, Git will open up a text editor of your choice so you can write your commit message. A good commit message might look something like this.
+	
+	So the first line is usually kept to about 50 characters or less. The line contains a short description of what the commit changes are about. After the first line, comes an empty line, and the rest of the text is usually kept under 72 characters. This text is intended to provide a detailed explanation of what's going on with the change. It can reference bugs or issues that will be fixed with the change. It can also include links to more information when relevant. The line limits can be annoying but they help in making the commit message be more digestible for the reader. There's a git command used to display these commit messages called git log. This command will do any line wrapping for us. Which means that if we don't stick to the recommended line wrapping, long commit messages will run off the edge of the screen and be difficult to read. Now, take a look at the lines in the commit message that start with the pound symbol. Just like in Python, this symbol indicates that these lines are comments and won't get included in the commit message. Git shows them to us whenever we're writing a commit message as a reminder of what files were about to commit. Sometimes it can be tempting to just write something short like update, change or fix as the description of our commit messages. Don't do it. It's super frustrating to go back to repositories history and discover that there's not enough context to understand what was changed and why. It takes only a few more seconds to write a better description. This can be invaluable down the line. Following these guidelines can help make your commit message really useful, and the investment of work now will really pay off later. If you're interested in learning more about git commit style, there are plenty of resources out there to read including the Linux kernel documentation itself along with impassioned opinions from other developers. We'll include links to all of them in the next reading. We said that we can check the history of the commits of our project using the git log command. Let's go back to our example scripts directory where we performed two commits and check out what git log has to say about those two commits.
+	
+	Take a look at what git tracks as part of the log. It's packing a lot of information in just a few lines. The first thing listed for each commit is its identifier, which is a long string of letters and numbers that uniquely identify each commit. The first commit in the list also says that the head indicator is pointing to the master branch. If this is gibberish to you, don't worry. We'll talk more about what a head and master means in later videos. For each commit, we see the name and the email of the person who made the commit which is indicated as the author. Then we get the date and time the commit was made. Finally the commit message is displayed. Our commit messages are very brief as we're just starting to work on our repository. As the work we do becomes more complex, we'll probably write longer descriptions with a lot more detail. Coming up, we've got a cheat sheet for you that lists all the git commands we've seen up until now along with links to additional information that you might find useful. After that, head over to the next practice quiz to help make sure you've wrapped your head around all these new concepts.
+	
+	\subsection{Initial Git Cheat}
+	
+	
+
