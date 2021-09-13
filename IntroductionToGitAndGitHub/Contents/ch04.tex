@@ -138,7 +138,7 @@
 	\begin{figure} 
 		\caption{Comment in a pull request.}
 		\centering
-		\includegraphics[scale=0.5]{W401a.png}
+		\includegraphics[scale=0.5]{W4/W401a.png}
 		\label{W401a}
 	\end{figure}
 	
@@ -173,7 +173,7 @@
 	\begin{figure} 
 		\caption{Two commits in the same \texttt{Pull request}.}
 		\centering
-		\includegraphics[scale=0.5]{W401b.png}
+		\includegraphics[scale=0.5]{W4/W401b.png}
 		\label{W401b}
 	\end{figure}
 	
@@ -230,7 +230,7 @@
 	\begin{figure} 
 		\caption{git log graph.}
 		\centering
-		\includegraphics[scale=0.5]{W401c.png}
+		\includegraphics[scale=0.5]{W4/W401c.png}
 		\label{W401c}
 	\end{figure}
 
@@ -243,7 +243,7 @@
 	\begin{figure} 
 		\caption{git log graph.}
 		\centering
-		\includegraphics[scale=0.5]{W401d.png}
+		\includegraphics[scale=0.5]{W4/W401d.png}
 		\label{W401d}
 	\end{figure}
 	
@@ -393,34 +393,117 @@
 	\subsection{Tracking Issues}
 	
 	
-	Deciding who's going to do what is critical when collaborating with others, with no coordination, two or more people might spend time working on the same part of a project while nobody works on the other critical parts. Imagine that you and your colleagues decided that you'd work on building automation software, for keeping the computers on your network up to date. But then instead of dividing the task into smaller pieces and assigning them to different people, you just randomly started working on some part of the infrastructure. The result would probably be total chaos, with different pieces of software that won't work well together, and lots of gaps that nobody worked on. For small teams, it's usually easy enough to discuss in person who's going to be working on what. But as soon as the group starts growing, talking about responsibilities and what to do next becomes more of a hassle. That's when a tool like an issue tracker or bug tracker can help us coordinate our work better. An issue tracker tells us the tasks that need to be done, the state they're in and who's working on them. The system also let's us add comments to the issue, these comments can be super helpful. They can give us more details about the problem, explain a way to solve it, or detail how to test if it's been solved. Issue trackers aren't just useful for people actively working on projects. They also let users report bugs when they come across them, even if they don't know how to solve the problem. Sometimes users come across problems that we never even thought possible. And having them report these issues through a bug tracker can help make our projects better. And the tracker can also help volunteers that want to start contributing to the project. Having a clear visible list of the pending work, lets new contributors figure out how to help and where to jump in. There are a bunch of different solutions to track bugs or issues. There's a popular bug tracker called Bugzilla, which is used by quite a few open source projects. On the flip side, platforms like GitHub have an issue tracker baked in. So, if you're hosting your project there, it can be very handy to track work on your project. Like the problems to solve, the features to add and the use cases to include it, let's check it out.
+	Deciding who's going to do what is critical when collaborating with others, with no coordination, two or more people might spend time working on the same part of a project while nobody works on the other critical parts. Imagine that you and your colleagues decided that you'd work on building automation software, for keeping the computers on your network up to date. But then instead of dividing the task into smaller pieces and assigning them to different people, you just randomly started working on some part of the infrastructure. The result would probably be total chaos, with different pieces of software that won't work well together, and lots of gaps that nobody worked on. For small teams, it's usually easy enough to discuss in person who's going to be working on what. But as soon as the group starts growing, talking about responsibilities and what to do next becomes more of a hassle. That's when a tool like an issue tracker or bug tracker can help us coordinate our work better. An issue tracker tells us the tasks that need to be done, the state they're in and who's working on them. The system also let's us add comments to the issue, these comments can be super helpful. They can give us more details about the problem, explain a way to solve it, or detail how to test if it's been solved. Issue trackers aren't just useful for people actively working on projects. They also let users report bugs when they come across them, even if they don't know how to solve the problem. Sometimes users come across problems that we never even thought possible. And having them report these issues through a bug tracker can help make our projects better. And the tracker can also help volunteers that want to start contributing to the project. Having a clear visible list of the pending work, lets new contributors figure out how to help and where to jump in. There are a bunch of different solutions to track bugs or issues. There's a popular bug tracker called Bugzilla, which is used by quite a few open source projects. On the flip side, platforms like GitHub have an issue tracker baked in. So, if you're hosting your project there, it can be very handy to track work on your project. Like the problems to solve, the features to add and the use cases to include it, let's check it out (Fig. \ref{W403a}).
 
-	This is the list of issues for our health-checks projects. For now, it only has one issue asking us to update our documentation. One of our colleagues suggested that we create a new health check that verifies if there are any critical error messages inside the system logs like current log or syslog. Errors that appear there might help troubleshoot some interesting problems. So, this sounds like a good idea for a new check. Let's create an issue for this feature by clicking on the New issue button. For the title of the issue, we'll say that we want to check for critical errors in system logs. And for the issues description we'll say that the new check should go through var/log/currentlog. And var/log/syslog and check if there are any critical errors that need attention.
+\begin{figure} 
+	\caption{List of issues.}
+	\centering
+	\includegraphics[scale=0.5]{W4/W403a.png}
+	\label{W403a}
+\end{figure}
 
-	When writing in issues description, it's a good idea to include all the information that we have about the problem or missing feature and any ideas on how to solve it. And if new information comes up later on, it can be added as additional comments on the same issue. Great, we're now ready to submit the new issue.
+	This is the list of issues for our health-checks projects. For now, it only has one issue asking us to update our documentation. One of our colleagues suggested that we create a new health check that verifies if there are any critical error messages inside the system logs like \texttt{current log} or \texttt{syslog}. Errors that appear there might help troubleshoot some interesting problems. So, this sounds like a good idea for a new check. 
+	Let's create an issue for this feature by clicking on the \texttt{New issue button}. For the title of the issue, we'll say that we want to \textbf{check for critical errors in system logs}. And for the issues description we'll say that the new \textbf{check should go through var/log/currentlog}. And var/log/syslog and check if there are any critical errors that need attention.
 
-	Okay, we now have the new list in our list of issues to solve. The issues in the list all have numbers that identify them, as we called out in an earlier video, in GitHub, each issue or pull request in a project has a unique number associated with it. So, if we have a pull request with the ID five, there won't be an issue with ID five. GitHub will automatically reference issues and pull requests and comments when we mention them using the hash tag number format. For example, if we use #2 in a comment, it will automatically reference the issue we just created. If you're fixing an issue through a pull request, it's possible to automatically close the issue directly once the code is merged. To do this, you need to include a string like closes:#4 in your commit message or as a part of the description of your pull request. Once the code gets merged into the main tree, GitHub will automatically close the issue with a message linking it to the new commit. Let's try this out by updating the documentation, like the #1 issue requested.
+	When writing in issues description, it's a good idea to include all the information that we have about the problem or missing feature and any ideas on how to solve it. And if new information comes up later on, it can be added as additional comments on the same issue. Great, we're now ready to \texttt{Submit the New Issue} (Fig. \ref{W403b}).
+
+\begin{figure} 
+	\caption{List of issues.}
+	\centering
+	\includegraphics[scale=0.5]{W4/W403b.png}
+	\label{W403b}
+\end{figure}
+
+	Okay, we now have the new list in our list of issues to solve. The issues in the list all have numbers that identify them, as we called out in an earlier video, \textbf{in GitHub, each issue or pull request in a project has a unique number associated with it}. So, if we have a pull request with the ID five, there won't be an issue with ID five. GitHub will automatically reference issues and pull requests and comments when we mention them using the hash tag number format. For example, if we use \verb|#2| in a comment, it will automatically reference the issue we just created. If you're fixing an issue through a \texttt{pull request}, it's possible to automatically close the issue directly once the code is merged. 
+	
+	To do this, you need to include a string like closes: \verb|#4| in your commit message or as a part of the description of your pull request. Once the code gets merged into the main tree, GitHub will automatically close the issue with a message linking it to the new commit.
+	
+	Let's try this out by updating the documentation, like the \verb|#1| issue requested.
 
 	This issue seems easy enough to fix, we need to update the README file to use the new file name and explain a bit more about how our script works. Before we start working on this, let's get the issue assigned to us.
 
 	Assigning issues to collaborators helps us track who is working on what. By assigning the bug to yourself, you can let others know that you're working on it, so they don't need to. All right, let's update the documentation.
+	
+	\begin{verbatim}
+		$ cd health-checks/
+		$ atom README.md
+		
+		# health-checks
+		Scripts that check the health of my computers
+		
+		This repo will be populated with lots of fancy checks.
+		
+		Currently the main script is all_checks.py
+	\end{verbatim}
 
-	So, we're still using the old name of the name file, all_checks.py, we renamed that file a while back to healthchecks.py. Let's change our README to use a new file name using inverted quotes to show monospace text. Then we'll add that the script will print everything okay, if all checks pass and it will print the corresponding error messages if something fails.
+	So, we're still using the old name of the name file, \verb|all_checks.py|, we renamed that file a while back to \verb|healthchecks.py|. Let's change our \texttt{README} to use a new file name using \textbf{inverted quotes to show} \texttt{monospace text}. Then we'll add that the script will print everything okay, if all checks pass and it will print the corresponding error messages if something fails.
+	
+	\begin{verbatim}
+		# health-checks
+		Scripts that check the health of my computers
+		
+		This repo will be populated with lots of fancy checks.
+		
+		Currently the main script is all_checks.py
+		
+		This script will print "Everithing ok" if all checks pass,
+		or the corresponding error messages if some checks fail.
+		
+	\end{verbatim}
 
-	We've updated the documentation, let's save the file and commit this change. This time, we'll call git comit -a so that we can edit the commit message in the text editor. We'll say that we've updated the README to use the new name of our script. And in a longer description, we'll add that we've included more info about how the script works. Finally, we'll wrap up by adding the string closes #1, so that the issue will get automatically closed once this commit is integrated into the main tree.
+	We've updated the documentation, let's save the file and commit this change. This time, we'll call \texttt{git comit} \verb|-a| so that we can edit the commit message in the text editor. We'll say that we've updated the \texttt{README} to use the new name of our script. And in a longer description, we'll add that we've included more info about how the script works. Finally, we'll wrap up by adding the string \texttt{closes} \verb|#1|, so that the issue will get automatically closed once this commit is integrated into the main tree.
+	
+	\begin{verbatim}
+		$ git commit -a
+		
+		Update README to use the new name of the script.
+		
+		Also add more information about how this works.
+		Closes #1
+	\end{verbatim}
+	
 
-	Our commit message looks good, let's save it and push it to the repo.
+	Our commit message looks good, let's save it and push it to the repo (\texttt{git push}).
 
 	Now let's go back to the issue that we were addressing.
 
-	We see that our issue is automatically closed with the commit we pushed. We can click on the commit ID to see the full commit.
+	We see that \textbf{our issue is automatically closed with the commit we pushed}. We can click on the commit ID to see the full commit.
 
-	So here's the commit message we created with the associated change. See how the #1 that we included as a part of the commit message is automatically detected as a link to the #1 issue. There's a bunch more to learn about tracking issues, but this should be enough to get you started. Feel free to experiment on your own and try more ways to interact with the system.
+	So here's the commit message we created with the associated change. See how the \verb|#1| that we included as a part of the commit message is automatically detected as a link to the \verb|#1| issue. There's a bunch more to learn about tracking issues, but this should be enough to get you started. Feel free to experiment on your own and try more ways to interact with the system.
 	
 	\subsection{Continuous Integration}
 	
 	
-	Throughout this course, we've been making changes to our files, sometimes we ran them manually to test if they still worked after the change, sometimes we just forgot to do that. This is common for any software project no matter how big or small. As humans, we're not great at remembering to do lots of stuff so we can't rely on people remembering to test their code, not even ourselves. Luckily, we don't need to. We can write automated tests to test the code for us and then use a continuous integration or CI system to run those tests automatically. A continuous integration system will build and test our code every time there's a change. This means that it will run whenever there's a new commit in the main branch of our code. It will also run for any changes that come in through pull request. In other words, if we have continuous integration configured for our project, we can automatically run our tests using the code in a pull request. This way, we can verify that the test will pass after the new changes get merged back into the tree and that means instead of hoping our collaborators will remember to properly test their code, we can rely on our automated testing system to do it for us. Once we have our code automatically built and tested, the next automation step is continuous deployment which is sometimes called continuous delivery or CD. Continuous deployment means the new code is deployed often. The goal is to avoid roll outs with a lot of changes between two versions of a project and instead do incremental updates with only a few changes at a time. This allows errors to be caught and fixed early. Typical configurations include deploying a new version whenever a commit is merged into the main tree or whenever a branch is tagged for release. There's a large world of tools and platforms related to CICD which is what the whole system is usually called. One popular option is Jenkins which can be used to automate lots of different types of projects. Some repository hosting services like GitLab provide their own infrastructure for doing continuous integration. GitHub doesn't offer an integrated solution. Instead, the popular alternative is to use Travis which communicates with GitHub and can access the information from GitHub projects to know which integrations to run. No matter which tool you use, there are a bunch of concepts that you'll need to deal with when creating your own CICD. The first one is a concept of pipelines. Pipelines specify the steps that need to run to get the result you want. For a simple Python Project, the pipeline could be to just run the automated tests. For a web service written in Go, the pipeline could be compiled the program, run the unit tests and integration tests and finally deploy the code to a test instance. Another concept that turns up when doing CICD is artifacts. This is the name used to describe any files that are generated as part of the pipeline. This typically includes the compiled versions of the code but can include other generated files like PDFs for the documentation or OS specific packages for easy installation. On top of this, you might want to keep the logs of the pipelines build and test stages to review if things fail. When setting up CICD, we have to be careful about how we manage secrets. If our pipeline includes deploying a new version of the software to a test server, we need to somehow give the software that's running the pipeline access to our test server. There are a bunch of different strategies to do this, like exchanging SSH keys or using application specific API tokens. For some pipelines, it might be unavoidable to use one of these methods but be aware that you're giving access to your test servers to the owner of the service that's running the pipeline for you. It's a bit like giving your house keys to the person checking your heating once a year. So two things to remember, first, make sure the authorized entities for the test servers are not the same entities authorized to deploy on the production servers. That way, if there's any kind of compromise in the pipeline, your production server is not affected. Second, always have a plan to recover your access in case your pipeline gets compromised. If you want to set up Travis for your GitHub project, you can do that by logging into the Travis website at www.travis-ci.com using your GitHub account then enable the projects that you want to continuously integrate. After that, you'll need to add a configuration file to your project written in YAML format that states the language your project is in, in which steps to take for the pipeline. This file can be very simple if your project files are typical configuration for the language you're using but can also become very complex if you want to run a complicated pipeline with lots of stages and steps outside the defaults. We won't go into a ton of detail here but there's more info in the next reading coming up. Feel free to read up on it and investigate on your own if you want to continuously integrate and deliver your project.
+	Throughout this course, we've been making changes to our files, sometimes we ran them manually to test if they still worked after the change, sometimes we just forgot to do that. This is common for any software project no matter how big or small. As humans, we're not great at remembering to do lots of stuff so we can't rely on people remembering to test their code, not even ourselves. 
+	
+	Luckily, we don't need to. \textbf{We can write automated tests to test the code for us and then use a continuous integration or \texttt{CI} system to run those tests automatically}. A continuous integration system \textbf{will build and test our code every time there's a change}. This means that it will run whenever there's a new commit in the main branch of our code. It will also run for any changes that come in through pull request. 
+	
+	In other words, if we have continuous integration configured for our project, we can \textbf{automatically run our tests using the code in a pull request}. This way, we can verify that the test will pass after the new changes get merged back into the tree and that means instead of hoping our collaborators will remember to properly test their code, we can rely on our automated testing system to do it for us. 
+	
+	Once we have our code automatically built and tested, the next automation step is \texttt{continuous deployment} which is sometimes called \texttt{continuous delivery} or \texttt{CD}. Continuous deployment means \textbf{the new code is deployed often}. The goal is to \textbf{avoid roll outs with a lot of changes between two versions of a project} and \textbf{instead do incremental updates with only a few changes at a time}. This \textbf{allows errors to be caught and fixed early}. 
+	
+	Typical configurations include deploying\textbf{ a new version whenever a commit is merged into the main tree} or whenever a branch is tagged for release. There's a large world of tools and platforms related to \verb|CI/CD| which is what the whole system is usually called. One popular option is \textbf{Jenkins} which can be used to automate lots of different types of projects. Some repository hosting services like GitLab provide their own infrastructure for doing continuous integration. 
+	
+	GitHub doesn't offer an integrated solution. Instead, the popular alternative is to use \verb|Travis| which communicates with GitHub and can access the information from GitHub projects to know which integrations to run. No matter which tool you use, there are a bunch of concepts that you'll need to deal with when creating your own \verb|CI/CD|.
+	
+	The first one is a concept of \texttt{pipelines}. \textbf{Pipelines specify the steps that need to run to get the result you want}. 
+	For a simple Python Project, the pipeline could be to just run the automated tests. 
+	For a web service written in Go, the pipeline could be compiled the program, run the unit tests and integration tests and finally deploy the code to a test instance. 
+	
+	Another concept that turns up when doing \verb|CI/CD| is \texttt{artifacts}. This is the name used to describe \textbf{any files that are generated as part of the pipeline}. 
+	This typically includes the compiled versions of the code but can include other generated files like PDFs for the documentation or OS specific packages for easy installation. 
+
+	On top of this, you might want to keep the logs of the pipelines build and test stages to review if things fail. 
+	
+	When setting up \verb|CI/CD|, we have to \textbf{be careful about how we manage secrets}. If our pipeline includes deploying a new version of the software to a test server, we need to somehow give the software that's running the pipeline access to our test server. 
+	There are a bunch of different strategies to do this, like exchanging \texttt{SSH key}s or using application specific API tokens. 
+	For some pipelines, it might be unavoidable to use one of these methods but be aware that you're giving access to your test servers to the owner of the service that's running the pipeline for you. 
+	It's a bit like giving your house keys to the person checking your heating once a year. 
+	
+	So two things to remember, \textbf{first, make sure the authorized entities for the test servers are not the same entities authorized to deploy on the production servers}. That way, if there's any kind of compromise in the pipeline, your production server is not affected.
+	\textbf{Second, always have a plan to recover your access in case your pipeline gets compromised}. If you want to set up Travis for your GitHub project, you can do that by logging into the Travis website at \verb|www.travis-ci.com| using your GitHub account then enable the projects that you want to continuously integrate. 
+	
+	After that, you'll need to add a configuration file to your project written in YAML format that states the language your project is in, in which steps to take for the pipeline. This file can be very simple if your project files are typical configuration for the language you're using but can also become very complex if you want to run a complicated pipeline with lots of stages and steps outside the defaults. We won't go into a ton of detail here but there's more info in the next reading coming up. Feel free to read up on it and investigate on your own if you want to continuously integrate and deliver your project.
 	
 	\subsection{Reading: Additional Tools}
 	
